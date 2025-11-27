@@ -119,47 +119,114 @@
    });
  }
 
- // Vínculos para links externos abrirem em nova aba
-  window.addEventListener('DOMContentLoaded', () => {
+ // Atualiza estado ativo do menu conforme seção visível
+ function updateActiveNavLink() {
+   const links = document.querySelectorAll('.nav-link[data-section], .mobile-nav-link[data-section]');
+   // Gera a lista de seções dinamicamente a partir dos links
+   const sections = Array.from(links).map(link => link.dataset.section);
+   const headerHeight = header ? header.offsetHeight : 0;
+   const scrollPos = window.pageYOffset + headerHeight + 10;
+   let current = 'home';
+
+   sections.forEach(id => {
+     const el = document.getElementById(id);
+     if (el) {
+       const top = el.offsetTop;
+       // Define a seção atual se a posição de rolagem passar do topo dela
+       if (scrollPos >= top) current = id;
+     }
+   });
+
+   links.forEach(link => {
+     const isActive = link.dataset.section === current;
+     link.classList.toggle('is-active', isActive);
+     if (isActive) link.setAttribute('aria-current', 'page');
+     else link.removeAttribute('aria-current');
+   });
+ }
+
+ // Lógica para o Modo Escuro (Dark Mode)
+ const themeToggleButtons = document.querySelectorAll('.theme-toggle-btn');
+ const moonIcons = document.querySelectorAll('.fa-moon');
+ const sunIcons = document.querySelectorAll('.fa-sun');
+
+ // Função para aplicar o tema e atualizar os ícones
+ function applyTheme(theme) {
+   document.documentElement.setAttribute('data-theme', theme);
+   localStorage.setItem('theme', theme);
+
+   if (theme === 'dark') {
+     moonIcons.forEach(icon => icon.style.display = 'none');
+     sunIcons.forEach(icon => icon.style.display = 'inline-block');
+     themeToggleButtons.forEach(btn => btn.setAttribute('aria-label', 'Ativar modo claro'));
+   } else {
+     moonIcons.forEach(icon => icon.style.display = 'inline-block');
+     sunIcons.forEach(icon => icon.style.display = 'none');
+     themeToggleButtons.forEach(btn => btn.setAttribute('aria-label', 'Ativar modo escuro'));
+   }
+ }
+
+ // Função para alternar o tema
+ function toggleTheme() {
+   const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+   applyTheme(newTheme);
+ }
+
+ // Adiciona o evento de clique aos botões
+ themeToggleButtons.forEach(btn => {
+   btn.addEventListener('click', toggleTheme);
+ });
+
+ // Define o tema inicial com base no localStorage ou preferência do sistema
+ function setInitialTheme() {
+   const savedTheme = localStorage.getItem('theme');
+   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+   
+   if (savedTheme) {
+     applyTheme(savedTheme);
+   } else {
+     applyTheme(prefersDark ? 'dark' : 'light');
+   }
+ }
+
+ // Evento principal que roda quando o conteúdo da página é carregado
+ document.addEventListener("DOMContentLoaded", () => {
+    // 1. Otimização de links externos e imagens
     document.querySelectorAll('a[href^="http"]').forEach(link => {
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
     });
 
-    // Otimiza carregamento de imagens
     document.querySelectorAll('img').forEach(img => {
-      if (!img.closest('.hero-image')) {
-        img.setAttribute('loading', 'lazy');
-      }
+      if (!img.closest('.hero-image')) img.setAttribute('loading', 'lazy');
       img.setAttribute('decoding', 'async');
     });
 
-    // Inicializa estado ativo do menu
-    updateActiveNavLink();
-  });
+    // Define o tema inicial (claro/escuro)
+    setInitialTheme();
 
- // Atualiza estado ativo do menu conforme seção visível
- function updateActiveNavLink() {
-  const links = document.querySelectorAll('.nav-link[data-section], .mobile-nav-link[data-section]');
-  const sections = ['resume','home','about','skills','projects','contact'];
-   const headerHeight = header ? header.offsetHeight : 0;
-   const scrollPos = window.pageYOffset + headerHeight + 10;
-   let current = 'home';
-   sections.forEach(id => {
-     const el = document.getElementById(id);
-     if (el) {
-       const top = el.offsetTop;
-       if (scrollPos >= top) current = id;
-     }
-   });
-   links.forEach(link => {
-     const isActive = link.dataset.section === current;
-     if (isActive) {
-       link.classList.add('is-active');
-       link.setAttribute('aria-current', 'page');
-     } else {
-       link.classList.remove('is-active');
-       link.removeAttribute('aria-current');
-     }
-   });
- }
+    // 2. Animações de scroll com Intersection Observer
+    // Seleciona todos os elementos que devem ser animados
+    const animatedItems = document.querySelectorAll('.animate-item, .animate-left, .animate-right');
+
+    // Cria um observador que adiciona a classe 'visible' quando o item entra na tela
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Anima apenas uma vez
+            }
+        });
+    }, {
+        threshold: 0.1 // Ativa quando 10% do item está visível
+    });
+
+    // Inicia a observação para cada item animado
+    animatedItems.forEach(item => {
+        observer.observe(item);
+    });
+
+    // 3. Inicializa o estado ativo do menu ao carregar a página
+    updateActiveNavLink();
+});

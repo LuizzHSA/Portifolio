@@ -27,12 +27,18 @@
 
                 <!-- Desktop Navigation -->
                 <div class="nav-links">
-                    <button class="nav-link" data-section="resume" onclick="scrollToSection('resume')">Currículo</button>
-                    <button class="nav-link" data-section="home" onclick="scrollToSection('home')">Home</button>
-                    <button class="nav-link" data-section="about" onclick="scrollToSection('about')">Sobre</button>
-                    <button class="nav-link" data-section="skills" onclick="scrollToSection('skills')">Habilidades</button>
-                    <button class="nav-link" data-section="projects" onclick="scrollToSection('projects')">Projetos</button>
-                    <button class="nav-link" data-section="contact" onclick="scrollToSection('contact')">Contato</button>
+                    <a href="#resume" class="nav-link" data-section="resume">Currículo</a>
+                    <a href="#home" class="nav-link" data-section="home">Home</a>
+                    <a href="#about" class="nav-link" data-section="about">Sobre</a>
+                    <a href="#skills" class="nav-link" data-section="skills">Habilidades</a>
+                    <a href="#projects" class="nav-link" data-section="projects">Projetos</a>
+                    <a href="#contact" class="nav-link" data-section="contact">Contato</a>
+
+                    <!-- Botão de Tema -->
+                    <button id="theme-toggle-desktop" class="nav-link theme-toggle-btn" aria-label="Ativar modo escuro">
+                        <i class="fas fa-moon"></i> <!-- Ícone para modo escuro -->
+                        <i class="fas fa-sun" style="display: none;"></i> <!-- Ícone para modo claro -->
+                    </button>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -44,12 +50,18 @@
             <!-- Mobile Navigation -->
             <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Navegação móvel" aria-hidden="true">
                 <div class="mobile-menu-links">
-                    <button class="mobile-nav-link" data-section="resume" onclick="scrollToSection('resume')">Currículo</button>
-                    <button class="mobile-nav-link" data-section="home" onclick="scrollToSection('home')">Home</button>
-                    <button class="mobile-nav-link" data-section="about" onclick="scrollToSection('about')">Sobre</button>
-                    <button class="mobile-nav-link" data-section="skills" onclick="scrollToSection('skills')">Habilidades</button>
-                    <button class="mobile-nav-link" data-section="projects" onclick="scrollToSection('projects')">Projetos</button>
-                    <button class="mobile-nav-link" data-section="contact" onclick="scrollToSection('contact')">Contato</button>
+                    <a href="#resume" class="mobile-nav-link" data-section="resume">Currículo</a>
+                    <a href="#home" class="mobile-nav-link" data-section="home">Home</a>
+                    <a href="#about" class="mobile-nav-link" data-section="about">Sobre</a>
+                    <a href="#skills" class="mobile-nav-link" data-section="skills">Habilidades</a>
+                    <a href="#projects" class="mobile-nav-link" data-section="projects">Projetos</a>
+                    <a href="#contact" class="mobile-nav-link" data-section="contact">Contato</a>
+                    
+                    <!-- Botão de Tema (Móvel) -->
+                    <button id="theme-toggle-mobile" class="mobile-nav-link theme-toggle-btn" aria-label="Ativar modo escuro">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun" style="display: none;"></i>
+                    </button>
                 </div>
             </div>
     </header>
@@ -76,16 +88,16 @@
                         </div>
 
                         <div class="social-links">
-                            <a href="https://github.com/luizhsa" target="_blank" rel="noopener noreferrer">
+                            <a href="https://github.com/luizhsa" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil de Luiz Henrique no GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://linkedin.com/luizhsa" target="_blank" rel="noopener noreferrer">
+                            <a href="https://linkedin.com/in/luizhsa" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil de Luiz Henrique no LinkedIn">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://www.instagram.com/luizzhsa/" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com/luizzhsa/" target="_blank" rel="noopener noreferrer" aria-label="Visitar perfil de Luiz Henrique no Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="mailto:seniorlulu20@gmail.com">
+                            <a href="mailto:seniorlulu20@gmail.com" aria-label="Enviar um e-mail para Luiz Henrique">
                                 <i class="fas fa-envelope"></i>
                             </a>
                         </div>
@@ -93,7 +105,7 @@
 
                     <div class="hero-image animate-right">
                         <div class="image-container">
-                            <img src="assets/img/profile.png" alt="Foto Perfil"
+                            <img src="assets/img/profile.png" alt="Foto de perfil de Luiz Henrique"
                                  />
                         </div>
                     </div>
@@ -286,7 +298,7 @@
                 <div class="projects-grid">
                     <div class="project-card animate-item">
                         <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=500"
-                            alt="Task Management App project screenshot" />
+                            alt="Captura de tela do projeto Sistema de Controle de Gastos" />
                         <div class="project-content">
                             <h3>Sistema Controle de Gastos</h3>
                             <p>Um aplicativo de controle de gastos e investimentos que ajuda os usuários a organizar seus gastos com
@@ -309,7 +321,7 @@
 
                     <div class="project-card animate-item">
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=500"
-                            alt="Social Media Dashboard project screenshot" />
+                            alt="Captura de tela do projeto Sistema de Controle de Livros" />
                         <div class="project-content">
                             <h3>Sistema Controle de Livros</h3>
                             <p>Um sistema feito para gerenciar sua biblioteca.</p>
@@ -327,6 +339,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
                 <div class="view-all-projects">
                     <button class="primary-btn">
@@ -340,30 +353,11 @@
         <!-- Resume & Certifications Section -->
         <section id="resume" class="resume-section section">
             <div class="container">
-                <h2 class="section-title">Currículo e Certificações</h2>
-                <p class="lead">Baixe meu currículo e conheça minhas certificações mais relevantes.</p>
+                <h2 class="section-title">Currículo</h2>
+                <p class="lead">Baixe meu currículo para conhecer minha trajetória profissional.</p>
 
                 <div class="resume-actions">
                     <a class="btn btn-primary" href="./assets/curriculo.pdf" download="Luiz-Henrique-Curriculo.pdf" aria-label="Baixar currículo em PDF">Baixar Currículo (PDF)</a>
-                    <a class="btn btn-outline" href="#certificacoes">Ver todas as certificações</a>
-                </div>
-
-                <div id="certificacoes" class="certs-grid">
-                    <article class="card cert-card">
-                        <h3 class="card-title">HTML & CSS Avançado</h3>
-                        <p>Fundamentos de semântica, acessibilidade, Flexbox e Grid.</p>
-                        <div class="chip-row"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">A11y</span></div>
-                    </article>
-                    <article class="card cert-card">
-                        <h3 class="card-title">JavaScript Moderno</h3>
-                        <p>ES6+, boas práticas e manipulação de DOM.</p>
-                        <div class="chip-row"><span class="chip">ES6+</span><span class="chip">DOM</span><span class="chip">Best Practices</span></div>
-                    </article>
-                    <article class="card cert-card">
-                        <h3 class="card-title">Responsividade e Performance</h3>
-                        <p>Mobile-first, otimizações e experiência do usuário.</p>
-                        <div class="chip-row"><span class="chip">Responsive</span><span class="chip">UX</span><span class="chip">Perf</span></div>
-                    </article>
                 </div>
             </div>
         </section>
@@ -482,9 +476,6 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <button onclick="scrollToSection('home')" class="footer-logo-btn">
-                        LUIZ<span>.dev</span>
-                    </button>
                     <p>Construindo experiências digitais excepcionais.</p>
                 </div>
 
